@@ -1,0 +1,96 @@
+{
+  "manifest_version": 2,
+  "id": "kpm-repo",
+  "name": "Kindle KPM Repository",
+  "description": "Unified KPM repository for Kindle packages maintained by kindle-lab.",
+  "packages": {
+    "ktm": {
+      "name": "ktm",
+      "author": "kindle-lab",
+      "description": "One-user Telegram bridge for Kindle",
+      "artifacts": [
+        {
+          "url": "packages/ktm/artifacts/ktm_0.1.15_kindlehf.kpkg",
+          "version": [
+            0,
+            1,
+            15
+          ],
+          "dependencies": [
+            {
+              "id": "kterm",
+              "min": [
+                2,
+                6,
+                0
+              ]
+            }
+          ],
+          "supported_platforms": [
+            "kindlehf"
+          ]
+        }
+      ]
+    },
+    "korean-ime-probe": {
+      "name": "Korean IME Probe",
+      "author": "kindle-lab",
+      "description": "Read-only compatibility probe for the Kindle Korean IME project.",
+      "artifacts": [
+        {
+          "url": "packages/korean-ime-probe/artifacts/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg",
+          "version": [
+            0,
+            2,
+            5
+          ],
+          "dependencies": [],
+          "supported_platforms": [
+            "kindlehf",
+            "kindlepw2"
+          ]
+        }
+      ]
+    },
+    "korean-ime": {
+      "name": "Korean IME native-focus trial",
+      "author": "kindle-lab",
+      "description": "Trial Dubeolsik composition bridge for the observed native Kindle GTK input method.",
+      "artifacts": [
+        {
+          "url": "packages/korean-ime/artifacts/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg",
+          "version": [
+            0,
+            6,
+            5
+          ],
+          "dependencies": [],
+          "supported_platforms": [
+            "kindlehf",
+            "kindlepw2"
+          ]
+        }
+      ]
+    },
+    "bluetooth-keymap-toggle": {
+      "name": "Bluetooth + Key Mapping Toggle",
+      "author": "kindle-lab",
+      "description": "One-touch control for existing Kindle HID passthrough and button mapping.",
+      "artifacts": [
+        {
+          "url": "packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.7_kindlehf-kindlepw2.kpkg",
+          "version": [
+            1,
+            0,
+            7
+          ],
+          "dependencies": [],
+          "supported_platforms": [
+            "kindlehf",
+            "kindlepw2"
+          ]
+        }
+      ]
+    }
+  }
+}
