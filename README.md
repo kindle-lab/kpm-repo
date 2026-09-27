@@ -2,15 +2,15 @@
 
 Unified public KPM distribution hub for the Kindle packages maintained by [kindle-lab](https://github.com/kindle-lab).
 
-**Status:** design stage · 2026-09-27
+**Status:** active hub structure · 2026-09-27
 
-## Purpose
+## Canonical install entry point
 
-kpm-repo will become the canonical public entry point for installing and updating the Kindle package set. It will expose one stable KPM manifest and a predictable artifact layout while the application repositories remain the source of code, tests, and build workflows.
-
-Planned canonical manifest URL:
+Use this manifest for new installations:
 
 https://raw.githubusercontent.com/kindle-lab/kpm-repo/main/manifest.json
+
+The application repositories remain the source of code, tests, build workflows, and release provenance. This repository owns the stable KPM-facing registry, mirrored package artifacts, and checksums.
 
 ## Package registry
 
@@ -21,16 +21,9 @@ https://raw.githubusercontent.com/kindle-lab/kpm-repo/main/manifest.json
 | `korean-ime` | [kindle-lab/kindle-korean-ime](https://github.com/kindle-lab/kindle-korean-ime) | Korean IME package |
 | `bluetooth-keymap-toggle` | [kindle-lab/kbt](https://github.com/kindle-lab/kbt) | Bluetooth HID and key-mapping toggle |
 
-Package IDs and published versions are compatibility identifiers. Once published, an artifact path and checksum must not be silently repointed to different bytes.
+Package IDs and published versions are compatibility identifiers. Published artifact bytes must not be silently replaced under an existing version and path.
 
-## Ownership and delivery model
-
-- Application repositories own source code, tests, platform builds, and release provenance.
-- `kpm-repo` owns the public registry, package metadata, checksums, and the stable KPM-facing layout.
-- The first implementation should mirror verified package artifacts into this repository and use relative URLs from `manifest.json`. This avoids making Kindle clients depend on several repository namespaces.
-- A later optimization may use release assets directly, but only after the KPM parser and update behavior are verified on a real device.
-
-Target layout:
+## Current layout
 
 ```text
 manifest.json
@@ -41,27 +34,33 @@ packages/
   bluetooth-keymap-toggle/artifacts/
 checksums/
   SHA256SUMS
+.github/workflows/
+  sync-artifacts.yml
 ```
 
-## Migration plan
+The hub manifest uses relative artifact paths. The mirrored artifacts currently match the source repositories' Git blobs, and `checksums/SHA256SUMS` records their SHA-256 values.
 
-1. Create and validate the hub manifest without changing the three application repositories.
-2. Import only verified artifacts and record SHA-256 checksums.
-3. Add a hub workflow that validates manifest/package agreement, archive contents, supported platforms, and checksum reproducibility.
-4. Test the new hub with KPM add-repo, update, install, and uninstall flows on supported Kindle targets.
-5. Update user-facing installation instructions to the canonical hub URL.
-6. Keep the legacy [financewiki-park/k](https://github.com/financewiki-park/k) repository as a compatibility bridge. It is not part of this migration and must remain available.
+## Synchronization
 
-## Namespace follow-up
+`.github/workflows/sync-artifacts.yml` downloads the current verified artifacts from the three source repositories, checks that every artifact path referenced by `manifest.json` exists, regenerates SHA-256 checksums, and commits synchronization changes when needed.
 
-The repositories were transferred without source edits. Before the first hub publication, review and explicitly decide how to handle the remaining historical `financewiki-park` references in package author metadata and the old `ktm` v0.1.0 release note. This is a planned follow-up, not an automatic rewrite.
+## Namespace migration
 
-## Acceptance checklist for implementation
+The active source repositories and current package metadata use the `kindle-lab` namespace. User-facing installation instructions point to this hub.
 
-- [ ] KPM manifest parses as the intended manifest version.
-- [ ] Every package ID has exactly one artifact entry and checksum.
-- [ ] Artifact URLs resolve from the new hub namespace.
-- [ ] Package versions and supported platforms match the source repositories.
-- [ ] A failed or mismatched artifact cannot be published.
-- [ ] Legacy `financewiki-park/k` remains unchanged and reachable.
-- [ ] Real-device install/update/uninstall smoke tests pass before announcing the hub.
+The legacy [financewiki-park/k](https://github.com/financewiki-park/k) repository remains available only as a compatibility bridge for previously configured Kindle clients. Do not delete or repurpose it while old installations may still reference it.
+
+Historical release notes or immutable package archives may still contain the former namespace as provenance. Those historical records are not the canonical installation path.
+
+## Migration status
+
+- [x] Canonical hub manifest created.
+- [x] Current package artifacts mirrored into the hub.
+- [x] SHA-256 checksums recorded.
+- [x] Hub synchronization workflow added.
+- [x] Active package author metadata normalized to `kindle-lab`.
+- [x] User-facing source-repository install instructions migrated to the canonical hub URL.
+- [x] Legacy `financewiki-park/k` compatibility bridge kept reachable.
+- [ ] Real-device add-repo/update/install/uninstall smoke test completed against the new hub on every supported Kindle target.
+
+Until the final real-device smoke test is complete, keep the compatibility bridge available.
