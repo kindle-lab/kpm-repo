@@ -1,0 +1,54 @@
+name: Sync verified KPM artifacts
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out hub
+        uses: actions/checkout@v4
+
+      - name: Download source artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p packages/ktm/artifacts packages/korean-ime-probe/artifacts packages/korean-ime/artifacts packages/bluetooth-keymap-toggle/artifacts checksums
+          curl -fL --retry 3 -o packages/ktm/artifacts/ktm_0.1.15_kindlehf.kpkg https://raw.githubusercontent.com/kindle-lab/ktm/main/packages/ktm/artifacts/ktm_0.1.15_kindlehf.kpkg
+          curl -fL --retry 3 -o packages/korean-ime-probe/artifacts/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg https://raw.githubusercontent.com/kindle-lab/kindle-korean-ime/main/packages/korean-ime-probe/artifacts/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg
+          curl -fL --retry 3 -o packages/korean-ime/artifacts/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg https://raw.githubusercontent.com/kindle-lab/kindle-korean-ime/main/packages/korean-ime/artifacts/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg
+          curl -fL --retry 3 -o packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.7_kindlehf-kindlepw2.kpkg https://raw.githubusercontent.com/kindle-lab/kbt/main/packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.7_kindlehf-kindlepw2.kpkg
+          sha256sum packages/*/artifacts/*.kpkg > checksums/SHA256SUMS
+
+      - name: Validate manifest paths
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("manifest.json").read_text())
+          for package in manifest["packages"].values():
+              for artifact in package["artifacts"]:
+                  path = Path(artifact["url"])
+                  if not path.is_file():
+                      raise SystemExit(f"Missing manifest artifact: {path}")
+          print("manifest paths valid")
+          PY
+
+      - name: Commit synchronized artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add manifest.json packages checksums
+          if git diff --cached --quiet; then
+            echo "No synchronization changes"
+          else
+            git commit -m "Sync verified KPM artifacts"
+            git push
+          fi
