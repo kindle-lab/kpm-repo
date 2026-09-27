@@ -18,10 +18,38 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p packages/ktm/artifacts packages/korean-ime-probe/artifacts packages/korean-ime/artifacts packages/bluetooth-keymap-toggle/artifacts checksums
-          curl -fL --retry 3 -o packages/ktm/artifacts/ktm_0.1.15_kindlehf.kpkg https://raw.githubusercontent.com/kindle-lab/ktm/main/packages/ktm/artifacts/ktm_0.1.15_kindlehf.kpkg
-          curl -fL --retry 3 -o packages/korean-ime-probe/artifacts/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg https://raw.githubusercontent.com/kindle-lab/kindle-korean-ime/main/packages/korean-ime-probe/artifacts/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg
-          curl -fL --retry 3 -o packages/korean-ime/artifacts/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg https://raw.githubusercontent.com/kindle-lab/kindle-korean-ime/main/packages/korean-ime/artifacts/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg
-          curl -fL --retry 3 -o packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.7_kindlehf-kindlepw2.kpkg https://raw.githubusercontent.com/kindle-lab/kbt/main/packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.7_kindlehf-kindlepw2.kpkg
+
+          curl -fL --retry 3 -o packages/ktm/artifacts/ktm_0.1.15_kindlehf.kpkg \
+            https://raw.githubusercontent.com/kindle-lab/ktm/main/packages/ktm/artifacts/ktm_0.1.15_kindlehf.kpkg
+
+          fetch_release_or_keep() {
+            local url="$1"
+            local dest="$2"
+            local tmp="${dest}.download"
+            if curl -fL --retry 3 -o "$tmp" "$url"; then
+              mv "$tmp" "$dest"
+            else
+              rm -f "$tmp"
+              if [ -s "$dest" ]; then
+                echo "Release asset unavailable; keeping existing verified mirror: $dest"
+              else
+                echo "Release asset unavailable and no verified mirror exists: $dest" >&2
+                exit 1
+              fi
+            fi
+          }
+
+          fetch_release_or_keep \
+            https://github.com/kindle-lab/kindle-korean-ime/releases/download/v0.6.5/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg \
+            packages/korean-ime-probe/artifacts/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg
+
+          fetch_release_or_keep \
+            https://github.com/kindle-lab/kindle-korean-ime/releases/download/v0.6.5/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg \
+            packages/korean-ime/artifacts/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg
+
+          curl -fL --retry 3 -o packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.7_kindlehf-kindlepw2.kpkg \
+            https://raw.githubusercontent.com/kindle-lab/kbt/main/packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.7_kindlehf-kindlepw2.kpkg
+
           sha256sum packages/*/artifacts/*.kpkg > checksums/SHA256SUMS
 
       - name: Validate manifest paths

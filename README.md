@@ -2,7 +2,7 @@
 
 Unified public KPM distribution hub for the Kindle packages maintained by [kindle-lab](https://github.com/kindle-lab).
 
-**Status:** active hub structure · 2026-09-27
+**Status:** active hub structure · 2026-09-28
 
 ## Canonical install entry point
 
@@ -10,7 +10,7 @@ Use this manifest for new installations:
 
 https://raw.githubusercontent.com/kindle-lab/kpm-repo/main/manifest.json
 
-The application repositories remain the source of code, tests, build workflows, and release provenance. This repository owns the stable KPM-facing registry, mirrored package artifacts, and checksums.
+The application repositories remain the source of code, tests, packaging inputs, CI, and release provenance. This repository owns the stable KPM-facing registry, mirrored package artifacts, and checksums.
 
 ## Package registry
 
@@ -38,11 +38,13 @@ checksums/
   sync-artifacts.yml
 ```
 
-The hub manifest uses relative artifact paths. The mirrored artifacts currently match the source repositories' Git blobs, and `checksums/SHA256SUMS` records their SHA-256 values.
+The hub manifest uses relative artifact paths. The hub intentionally keeps the currently verified `.kpkg` mirrors required by KPM clients, while source repositories may keep build outputs only in CI artifacts and GitHub Releases.
 
 ## Synchronization
 
-`.github/workflows/sync-artifacts.yml` downloads the current verified artifacts from the three source repositories, checks that every artifact path referenced by `manifest.json` exists, regenerates SHA-256 checksums, and commits synchronization changes when needed.
+`.github/workflows/sync-artifacts.yml` refreshes verified package mirrors, checks that every artifact path referenced by `manifest.json` exists, regenerates SHA-256 checksums, and commits synchronization changes when needed.
+
+For `kindle-korean-ime`, the source repository no longer commits generated `.kpkg` files. The hub therefore pulls tagged GitHub Release assets when available and retains the already verified hub mirror if that release asset has not yet been published.
 
 ## Namespace migration
 
