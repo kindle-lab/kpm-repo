@@ -1,4 +1,5 @@
 9a1ac4567fe8162dfcbf81bc6c561f8984ff30839c3918c3d2096cd62386d496  packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.7_kindlehf-kindlepw2.kpkg
-a9f8e5a57392acf0326b5f96c495c441bf86fedd7e845fc46a1361960d1c3eb5  packages/korean-ime-probe/artifacts/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg
-79d37da9d8003400d7bfdea4a8e322789685ed2a7ac95f172bfb48b05bec2840  packages/korean-ime/artifacts/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg
+5479aef184e32269d75b427d2ae54cb3460826f395d2cc5daf0c2fc1d7187d03  packages/korean-ime-probe/artifacts/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg
+e36c92f1d0f3715684a694362bb8e2edf5dc5f4b8ac17428139367a7f9c7ec1d  packages/korean-ime/artifacts/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg
 05daed14ffdc5a87bc33feaa466cdb7c260cff4d9f8980a4545b2ea085fcb409  packages/ktm/artifacts/ktm_0.1.15_kindlehf.kpkg
+a33625c1188d533894085b66638f39ed5b2ff89cc4dadb371707fa175da0db78  packages/ktm/artifacts/ktm_0.1.16_kindlehf.kpkg
