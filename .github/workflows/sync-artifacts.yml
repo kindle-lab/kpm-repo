@@ -2,6 +2,10 @@ name: Sync verified KPM artifacts
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'manifest.json'
 
 permissions:
   contents: write
@@ -19,8 +23,8 @@ jobs:
           set -euo pipefail
           mkdir -p packages/ktm/artifacts packages/korean-ime-probe/artifacts packages/korean-ime/artifacts packages/bluetooth-keymap-toggle/artifacts checksums
 
-          curl -fL --retry 3 -o packages/ktm/artifacts/ktm_0.1.15_kindlehf.kpkg \
-            https://raw.githubusercontent.com/kindle-lab/ktm/main/packages/ktm/artifacts/ktm_0.1.15_kindlehf.kpkg
+          curl -fL --retry 3 -o packages/ktm/artifacts/ktm_0.1.16_kindlehf.kpkg \
+            https://raw.githubusercontent.com/kindle-lab/ktm/main/packages/ktm/artifacts/ktm_0.1.16_kindlehf.kpkg
 
           fetch_release_or_keep() {
             local url="$1"
