@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p packages/ktm/artifacts packages/korean-ime-probe/artifacts packages/korean-ime/artifacts packages/bluetooth-keymap-toggle/artifacts checksums
+          mkdir -p packages/ktm/artifacts packages/korean-crossword/artifacts packages/korean-ime-probe/artifacts packages/korean-ime/artifacts packages/bluetooth-keymap-toggle/artifacts checksums
 
           curl -fL --retry 3 -o packages/ktm/artifacts/ktm_0.1.16_kindlehf.kpkg \
             https://raw.githubusercontent.com/kindle-lab/ktm/main/packages/ktm/artifacts/ktm_0.1.16_kindlehf.kpkg
@@ -42,6 +42,10 @@ jobs:
               fi
             fi
           }
+
+          fetch_release_or_keep \
+            https://github.com/kindle-lab/kindle-crossword/releases/download/v0.1.0/korean-crossword-kindlehf.kpkg \
+            packages/korean-crossword/artifacts/korean-crossword_0.1.0_kindlehf.kpkg
 
           fetch_release_or_keep \
             https://github.com/kindle-lab/kindle-korean-ime/releases/download/v0.6.5/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg \
