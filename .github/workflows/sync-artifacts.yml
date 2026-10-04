@@ -44,8 +44,8 @@ jobs:
           }
 
           fetch_release_or_keep \
-            https://github.com/kindle-lab/kindle-crossword/releases/download/v0.2.1/korean-crossword-kindlehf.kpkg \
-            packages/korean-crossword/artifacts/korean-crossword_0.2.1_kindlehf.kpkg
+            https://github.com/kindle-lab/kindle-crossword/releases/download/v0.3.0/korean-crossword-kindlehf.kpkg \
+            packages/korean-crossword/artifacts/korean-crossword_0.3.0_kindlehf.kpkg
 
           fetch_release_or_keep \
             https://github.com/kindle-lab/kindle-korean-ime/releases/download/v0.6.5/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg \
