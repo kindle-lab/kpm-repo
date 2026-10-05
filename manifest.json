@@ -23,8 +23,8 @@
       "description": "한국일보 실제 최신 크로스워드를 원본 단서·기사 연결과 함께 Kindle에서 푸는 독립 클라이언트",
       "artifacts": [
         {
-          "url": "packages/korean-crossword/artifacts/korean-crossword_0.4.1_kindlehf.kpkg",
-          "version": [0, 4, 1],
+          "url": "packages/korean-crossword/artifacts/korean-crossword_0.4.2_kindlehf.kpkg",
+          "version": [0, 4, 2],
           "dependencies": [],
           "supported_platforms": ["kindlehf"]
         }
