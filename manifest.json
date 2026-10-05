@@ -11,43 +11,22 @@
       "artifacts": [
         {
           "url": "packages/ktm/artifacts/ktm_0.1.16_kindlehf.kpkg",
-          "version": [
-            0,
-            1,
-            16
-          ],
-          "dependencies": [
-            {
-              "id": "kterm",
-              "min": [
-                2,
-                6,
-                0
-              ]
-            }
-          ],
-          "supported_platforms": [
-            "kindlehf"
-          ]
+          "version": [0, 1, 16],
+          "dependencies": [{"id": "kterm", "min": [2, 6, 0]}],
+          "supported_platforms": ["kindlehf"]
         }
       ]
     },
     "korean-crossword": {
       "name": "한국일보 크로스워드",
       "author": "kindle-lab",
-      "description": "한국일보 오늘의 크로스워드를 Kindle 독립 앱에서 풀어 보는 클라이언트",
+      "description": "한국일보 실제 최신 크로스워드를 원본 단서·기사 연결과 함께 Kindle에서 푸는 독립 클라이언트",
       "artifacts": [
         {
-          "url": "packages/korean-crossword/artifacts/korean-crossword_0.3.0_kindlehf.kpkg",
-          "version": [
-            0,
-            3,
-            0
-          ],
+          "url": "packages/korean-crossword/artifacts/korean-crossword_0.4.0_kindlehf.kpkg",
+          "version": [0, 4, 0],
           "dependencies": [],
-          "supported_platforms": [
-            "kindlehf"
-          ]
+          "supported_platforms": ["kindlehf"]
         }
       ]
     },
@@ -58,16 +37,9 @@
       "artifacts": [
         {
           "url": "packages/korean-ime-probe/artifacts/korean-ime-probe_0.2.5_kindlehf-kindlepw2.kpkg",
-          "version": [
-            0,
-            2,
-            5
-          ],
+          "version": [0, 2, 5],
           "dependencies": [],
-          "supported_platforms": [
-            "kindlehf",
-            "kindlepw2"
-          ]
+          "supported_platforms": ["kindlehf", "kindlepw2"]
         }
       ]
     },
@@ -78,16 +50,9 @@
       "artifacts": [
         {
           "url": "packages/korean-ime/artifacts/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg",
-          "version": [
-            0,
-            6,
-            5
-          ],
+          "version": [0, 6, 5],
           "dependencies": [],
-          "supported_platforms": [
-            "kindlehf",
-            "kindlepw2"
-          ]
+          "supported_platforms": ["kindlehf", "kindlepw2"]
         }
       ]
     },
@@ -98,16 +63,9 @@
       "artifacts": [
         {
           "url": "packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.7_kindlehf-kindlepw2.kpkg",
-          "version": [
-            1,
-            0,
-            7
-          ],
+          "version": [1, 0, 7],
           "dependencies": [],
-          "supported_platforms": [
-            "kindlehf",
-            "kindlepw2"
-          ]
+          "supported_platforms": ["kindlehf", "kindlepw2"]
         }
       ]
     }
