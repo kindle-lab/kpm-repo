@@ -55,8 +55,8 @@ jobs:
             https://github.com/kindle-lab/kindle-korean-ime/releases/download/v0.6.5/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg \
             packages/korean-ime/artifacts/korean-ime_0.6.5_kindlehf-kindlepw2.kpkg
 
-          curl -fL --retry 3 -o packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.7_kindlehf-kindlepw2.kpkg \
-            https://raw.githubusercontent.com/kindle-lab/kbt/main/packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.7_kindlehf-kindlepw2.kpkg
+          curl -fL --retry 3 -o packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.8_kindlehf-kindlepw2.kpkg \
+            https://raw.githubusercontent.com/kindle-lab/kbt/main/packages/bluetooth-keymap-toggle/artifacts/bluetooth-keymap-toggle_1.0.8_kindlehf-kindlepw2.kpkg
 
           sha256sum packages/*/artifacts/*.kpkg > checksums/SHA256SUMS
 
