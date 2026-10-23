@@ -20,6 +20,7 @@ The application repositories remain the source of code, tests, packaging inputs,
 | `korean-ime-probe` | [kindle-lab/kindle-korean-ime](https://github.com/kindle-lab/kindle-korean-ime) | Read-only compatibility probe |
 | `korean-ime` | [kindle-lab/kindle-korean-ime](https://github.com/kindle-lab/kindle-korean-ime) | Korean IME package |
 | `bluetooth-keymap-toggle` | [kindle-lab/kbt](https://github.com/kindle-lab/kbt) | Bluetooth HID and key-mapping toggle |
+| `fw` | [kindle-lab/financewiki-kindle](https://github.com/kindle-lab/financewiki-kindle) | FinanceWiki read-only reader (Kindle Basic 11th gen) |
 
 Package IDs and published versions are compatibility identifiers. Published artifact bytes must not be silently replaced under an existing version and path.
 
@@ -32,6 +33,7 @@ packages/
   korean-ime-probe/artifacts/
   korean-ime/artifacts/
   bluetooth-keymap-toggle/artifacts/
+  fw/artifacts/
 checksums/
   SHA256SUMS
 .github/workflows/
